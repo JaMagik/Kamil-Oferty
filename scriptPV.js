@@ -33,6 +33,32 @@ let panelType;
 let ZNDs1;
 let ZNDs2;
 let ZNDs3;
+let JIDs1;
+let JIDs2;
+let JIFox;
+let imageJIHybrid;
+let imageJIStorage;
+let imageJIFronius;
+let JADs1;
+let JADs2;
+let imageJAFox;
+let imageJAHybrid;
+let imageJAStorage;
+let imageJAFronius;
+let FOXHybCanadian;
+let FoxHybZN;
+let FoxHybJa;
+let FoxHybJin;
+let FoxStorageCanadian;
+let FoxStorageZN;
+let FoxStorageJa;
+let FoxStorageJin;
+let FoxHybDS1;
+let FoxHybDS2;
+let FoxStorageDS1;
+let FoxStorageDS2;
+
+
 
 
 async function loadImageDataForPV() {
@@ -66,6 +92,30 @@ async function loadImageDataForPV() {
     ZNDs1 = imagesModule.ZNDs1;
     ZNDs2 = imagesModule.ZNDs2; 
     ZNDs3 = imagesModule.ZNDs3;
+    JIDs1 = imagesModule.JIDs1;
+    JIDs2 = imagesModule.JIDs2;
+    JIFox = imagesModule.JIFox;
+    imageJIHybrid = imagesModule.imageJIHybrid;
+    imageJIStorage = imagesModule.imageJIStorage;
+    imageJIFronius = imagesModule.imageJIFronius;
+    JADs1 = imagesModule.JADs1;
+    JADs2 = imagesModule.JADs2;
+    imageJAFox = imagesModule.imageJAFox;
+    imageJAFronius = imagesModule.imageJAFronius;
+    imageJAStorage = imagesModule.imageJAStorage;
+    imageJAHybrid = imagesModule.imageJAHybrid;
+    FOXHybCanadian = imagesModule.FOXHybCanadian;
+    FoxHybZN = imagesModule.FoxHybZN;
+    FoxHybJa = imagesModule.FoxHybJa;
+    FoxHybJin = imagesModule.FoxHybJin;
+    FoxStorageCanadian = imagesModule.FoxStorageCanadian;
+    FoxStorageZN = imagesModule.FoxStorageZN;
+    FoxStorageJa = imagesModule.FoxStorageJa;
+    FoxStorageJin = imagesModule.FoxStorageJin;
+    FoxHybDS1 = imagesModule.FoxHybDS1;
+    FoxHybDS2 = imagesModule.FoxHybDS2;
+    FoxStorageDS1 = imagesModule.FoxStorageDS1;
+    FoxStorageDS2 = imagesModule.FoxStorageDS2;
 
 }
 
@@ -81,6 +131,10 @@ function getInverterImage(inverterType, panelType) {
                     return imageZNFox;
                 case "canadian":
                     return imageFOX2;
+                    case "jinko 475":
+                    return JIFox;
+                    case "jasolar":
+                    return imageJAFox;
                 // Domyślny obraz dla standardowego falownika
             }
             break;
@@ -90,15 +144,51 @@ function getInverterImage(inverterType, panelType) {
                     return imageZNHybrid;
                 case "canadian":
                     return imageSungrow2;
+                    case "jinko 475":
+                    return imageJIHybrid;
+                    case "jasolar":
+                    return imageJAHybrid;
+                    
                  // Domyślny obraz dla falownika hybrydowego
             }
             break;
+
+            case "hybridFOX":
+            switch (panelType) {
+                case "zn-shine":
+                    return FoxHybZN;
+                case "canadian":
+                    return FOXHybCanadian;
+                    case "jinko 475":
+                    return FoxHybJin;
+                    case "jasolar":
+                    return FoxHybJa;
+                    
+                 // Domyślny obraz dla falownika hybrydowego
+            }
         case "hybridWithStorage":
             switch (panelType) {
                 case "zn-shine":
                     return imageZNHybridWithStorage;
                 case "canadian":
                     return imageMVSTORAGEMAIN;
+                    case "jinko 475":
+                    return imageJIStorage;
+                    case "jasolar":
+                    return imageJAStorage;
+                // Domyślny obraz dla hybrydy z magazynem
+            }
+
+            case "hybridWithStorageFOX":
+            switch (panelType) {
+                case "zn-shine":
+                    return FoxStorageZN;
+                case "canadian":
+                    return FoxStorageCanadian;
+                    case "jinko 475":
+                    return FoxStorageJin;
+                    case "jasolar":
+                    return FoxStorageJin;
                 // Domyślny obraz dla hybrydy z magazynem
             }
             break;
@@ -108,7 +198,11 @@ function getInverterImage(inverterType, panelType) {
                     return imageZNFronius;
                 case "canadian":
                     return imageFronius;
-                // Domyślny obraz dla Fronius
+                    case "jinko 475":
+                        return imageJIFronius;
+                        case "jasolar":
+                            return imageJAFronius;
+                        // Domyślny obraz dla Fronius
             }
             break;
      // Domyślny obraz dla nieznanego typu falownika
@@ -126,7 +220,15 @@ function getThirdPage(inverterType) {
     
     case "hybridWithStorage":
     return imageSungrowDS1;
+    
+    case "hybridWithStorageFOX":
+        return FoxHybDS1;
+
+        case "hybridFOX":
+            return FoxHybDS1;
+
     }
+    
 }
 
 function getFifthPage(panelType) {
@@ -134,8 +236,14 @@ function getFifthPage(panelType) {
         case "canadian":
             return imageCSDS1; // Zmienna z obrazem dla standardowego falownika
         case "zn-shine":
-            return ZNDs1; // Zmienna z obrazem dla falownika hybrydowego
+            return ZNDs1; 
+         case "jinko 475":
+            return JIDs1;
+            case "jasolar":
+            return JADs1;
+            // Zmienna z obrazem dla falownika hybrydowego
     }
+    
 }
 
 function getSixthPage(panelType) {
@@ -143,8 +251,14 @@ function getSixthPage(panelType) {
         case "canadian":
             return imageCSDS2; // Zmienna z obrazem dla standardowego falownika
         case "zn-shine":
-            return ZNDs2; // Zmienna z obrazem dla falownika hybrydowego
+            return ZNDs2; 
+            case "jinko 475":
+            return JIDs2;
+            case "jasolar":
+            return JADs2;
+            // Zmienna z obrazem dla falownika hybrydowego
     }
+    
 }
 
 function getFourthPage(inverterType) {
@@ -157,6 +271,11 @@ function getFourthPage(inverterType) {
     return imageSungrowDS2;
     case "fronius":
                 return imageFroniusDS2;
+                case "hybridWithStorageFOX":
+        return FoxHybDS2;
+
+        case "hybridFOX":
+            return FoxHybDS1;
     }
 }
 
@@ -194,7 +313,6 @@ function createTableContent(panelDescription, inverterType, includeEnergyStorage
         case 'hybrid':
         case 'hybridWithStorage':
             inverterModel = 'Sungrow';
-            break;
         case 'fronius':
             inverterModel = 'Fronius';
             break;
@@ -209,6 +327,12 @@ function createTableContent(panelDescription, inverterType, includeEnergyStorage
             break;
         case 'canadian':
             panelName = 'Panele fotowoltaiczne Canadian Solar 455 Wp';
+            break;
+            case 'jinko 475':
+            panelName = 'Panele fotowoltaiczne JINKO Solar 475 Wp';
+            break;
+            case 'jasolar':
+            panelName = 'Panele fotowoltaiczne JA SOLAR 460 Wp';
             break;
         default:
             panelName = 'Standardowy panel';
@@ -247,7 +371,7 @@ function createTableContent(panelDescription, inverterType, includeEnergyStorage
         tableContent += `
             <tr>
                 <td>3</td>
-                <td>Magazyn energii Pylontech Force</td>
+                <td>Magazyn energii PYLONTECH/FOXESS</td>
                 <td>szt.</td>
                 <td>1</td>
             </tr>`;
@@ -321,7 +445,7 @@ async function generatePVPDF() {
  
     let backgroundImage = getFirstPageBackgroundImage(installationType);
 
-    let tableContent = createTableContent(panelDescription, inverterType, inverterType === 'hybridWithStorage', panelType);
+    let tableContent = createTableContent(panelDescription, inverterType, inverterType === 'hybridWithStorage' || 'hybridWithStorageFox', panelType);
 
     let content = '';
 
@@ -412,21 +536,20 @@ const secondPageContent = `
         const storageImage3 = imageMVSTORAGE2;
         const storageImage4 = imageMVSTORAGE3;
         const ZNLast = ZNDs3;
-    
+        const FoxStorage1 = FoxStorageDS1; 
+        const FoxStorage2 = FoxStorageDS2; 
+
+
+
         const storagePageContent1 = `<div id="page" style="background-image: url('${storageImage1}');"></div>`;
         const storagePageContent2 = `<div id="page" style="background-image: url('${storageImage2}');"></div>`;
         const storagePageContent3 = `<div id="page" style="background-image: url('${storageImage3}');"></div>`;
         const storagePageContent4 = `<div id="page" style="background-image: url('${storageImage4}');"></div>`;
         const LastZN = `<div id="page" style="background-image: url('${ZNLast}');"></div>`;
+        const FSTOR1 = `<div id="page" style="background-image: url('${FoxStorage1}');"></div>`;
+        const FSTOR2 = `<div id="page" style="background-image: url('${FoxStorage2}');"></div>`;
 
 
-        if (inverterType === 'hybridWithStorage') {
-            // Dodaj strony dla magazynu energii
-            content = firstPageContent + secondPageContent + thirdPageContent + FourthPageContent + FiftPageContent + sixthPageContent + storagePageContent1 + storagePageContent2 + storagePageContent3 + storagePageContent4 + seventhPageContent;
-        } else {
-            // Dodaj standardowe strony
-            content = firstPageContent + secondPageContent + thirdPageContent + FourthPageContent + FiftPageContent + sixthPageContent + seventhPageContent;
-        }
 
 
         if (inverterType === 'hybridWithStorage') {
@@ -437,7 +560,19 @@ const secondPageContent = `
                 // Użyj standardowej treści dla hybrydy z magazynem energii
                 content = firstPageContent + secondPageContent + thirdPageContent + FourthPageContent + FiftPageContent + sixthPageContent + storagePageContent1 + storagePageContent2 + storagePageContent3 + storagePageContent4 + seventhPageContent;
             }
-        } else {
+        }
+        
+        else if (inverterType === 'hybridWithStorageFOX') {
+            if (panelType === 'zn-shine') {
+                // Treść specyficzna dla hybrydy FOX z magazynem energii i paneli ZN-Shine
+                content = firstPageContent + secondPageContent + thirdPageContent + FourthPageContent + FiftPageContent + sixthPageContent + LastZN + FSTOR1+FSTOR2 + seventhPageContent;
+            } else {
+                // Standardowa treść dla hybrydy FOX z magazynem energii
+                content = firstPageContent + secondPageContent + thirdPageContent + FourthPageContent + FiftPageContent + sixthPageContent +FSTOR1 + FSTOR2 + seventhPageContent;
+            }
+        }
+        
+        else {
             if (panelType === 'zn-shine') {
                 // Użyj treści specyficznej dla paneli ZN-Shine
                 content = firstPageContent + secondPageContent + thirdPageContent + FourthPageContent + FiftPageContent + sixthPageContent + LastZN+ seventhPageContent;
