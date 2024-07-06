@@ -99,6 +99,19 @@ let KKPELLETDS;
 let KDLX1;
 let KDLX2;
 let KDLXDS;
+let MHP1;
+let MHPDS1;
+let MHPDS2;
+let ATLHB2DS1;
+let ATLHB2DS2;
+let ATLHB2DS3;
+let ATLHB2DS4;
+let ATLHB1;
+let ATLHB2;
+let ATLHBL1;
+let ATLHBL2;
+let ATLANTICDS1;
+let ATLANTICDS2;
 
 
 
@@ -203,6 +216,20 @@ async function loadImageData() {
     KDLX1 = imagesModule.KDLX1;
     KDLX2 = imagesModule.KDLX2;
     KDLXDS = imagesModule.KDLXDS;
+    MHP1 = imagesModule.MHP1;
+    MHPDS1 = imagesModule.MHPDS1;
+    MHPDS2 = imagesModule.MHPDS2;
+    ATLHB2DS1 = imagesModule.ATLHB2DS1;
+    ATLHB2DS2 = imagesModule.ATLHB2DS2;
+    ATLHB2DS3 = imagesModule.ATLHB2DS3;
+    ATLHB2DS4 = imagesModule.ATLHB2DS4;
+    ATLHB1 = imagesModule.ATLHB1;
+    ATLHB2 = imagesModule.ATLHB2;
+    ATLHBL1 = imagesModule.ATLHBL1;
+    ATLHBL2 = imagesModule.ATLHBL2;
+    ATLANTICDS1 = imagesModule.ATLANTICDS1;
+    ATLANTICDS2 = imagesModule.ATLANTICDS2;
+
 } 
 
 loadImageData();
@@ -234,88 +261,115 @@ function getInverterImage(inverterType) {
 }
 
 function getSecondPageBackgroundImageByType(pdfType) {
+
+    var selectedPower = document.getElementById('powerOptions').value;
+
+    if (pdfType === "ATLANTIC-HYDROBOX") {
+        if (selectedPower === '6 kW' || selectedPower === '8 kW' || selectedPower === '10 kW') {
+            return ATLHBL2; // Zmienna dla mocy 6-10 kW
+        } else if (selectedPower === '14 kW' || selectedPower === '15 kW' || selectedPower === '17 kW') {
+            return ATLHB2; // Zmienna dla mocy 14-17 kW
+        } else {
+            return ATLHB2; // Domyślny obraz dla ATLANTIC-HYDROBOX, jeśli power nie jest określone
+        }
+    }
+
     switch(pdfType) {
         case "Mitsubishi-cylinder":
             return imageBase61;
-            case "Mitsubishi-ecoinverter":
+        case "Mitsubishi-ecoinverter":
             return imageBase61;
-            case "Mitsubishi-hydrobox":
-            return imageBase61; // Zakładam, że masz zdefiniowane zmienne dla każdego typu
+        case "Mitsubishi-hp":
+            return MHP1;
+        case "Mitsubishi-hydrobox":
+            return imageBase61;
         case "Toshiba 3F":
             return imageBaseForToshiba;
-            case "Toshiba 1F":
-                return imageBaseForToshiba;
+        case "Toshiba 1F":
+            return imageBaseForToshiba;
         case "ATLANTIC":
-            return  imageBase56;
-            case "GALMET-PRIMA":
-            return  imageBaseGalmetZEW;
-            case "HEIZTECHNIK":
+            return imageBase56;
+        case "GALMET-PRIMA":
+            return imageBaseGalmetZEW;
+        case "HEIZTECHNIK":
             return imageBaseHeizZEW;
-            case "VIESSMANN":
-                return imageBaseViessmanZEW;
-
-                case "MITSUBISHI AP":
-                    return MitsubishiAPZew;
-                    case "MITSUBISHI HR":
-                        return MitsubishiHRZew;   
-            case "LAZAR":
-                return Lazar2;
-                case "ROTENSO":
-                    return R1;
-                    case "KIPI":
-                    return KIPI2;
-                    case "KAMEN-KOMPAKT-LUX":
-                    return KKLUX2;
-                    case "KAMEN-PELLET-KOMPAKT":
-                    return KKPELLET2;
-                    case "KAMEN-DRX":
-                    return KDLX2;
-                    
+        case "VIESSMANN":
+            return imageBaseViessmanZEW;
+        case "MITSUBISHI AP":
+            return MitsubishiAPZew;
+        case "MITSUBISHI HR":
+            return MitsubishiHRZew;   
+        case "LAZAR":
+            return Lazar2;
+        case "ROTENSO":
+            return R1;
+        case "KIPI":
+            return KIPI2;
+        case "KAMEN-KOMPAKT-LUX":
+            return KKLUX2;
+        case "KAMEN-PELLET-KOMPAKT":
+            return KKPELLET2;
+        case "KAMEN-DRX":
+            return KDLX2;
         default:
             return null; // lub jakiś domyślny obraz, jeśli potrzebujesz
     }
 }
 
 function getBackgroundImageByType(pdfType) {
-    switch(pdfType) {
-        case "Mitsubishi-cylinder":
-            return imageBaseMitsubishiCylinder;
-            case "Mitsubishi-ecoinverter":
-            return imageBaseMitsubishiCylinder;
-            case "Mitsubishi-hydrobox":
-            return imageBase64;
-        case "Toshiba 3F":
-            return imageBase57;
-            case "Toshiba 1F":
-            return imageBase57;
-        case "ATLANTIC":
-            return imageBaseForAtlantic;
-            case "GALMET-PRIMA":
-            return imageBaseGalmetWEW;
-            case "HEIZTECHNIK":
-            return imageBaseHeizWEW;
-            case "VIESSMANN":
-                return imageBaseViessmanWEW;
-                case "MITSUBISHI AP":
-                    return MitsubishiAP;
-                    case "MITSUBISHI HR":
-                        return MitsubishiHR;  
-            case "LAZAR":
-                return Lazar1;  
-                case "ROTENSO":
-                    return R2; 
-                    case "KIPI":
-                    return KIPI1;  
-                    case "KAMEN-KOMPAKT-LUX":
-                    return KKLUX1;  
-                    case "KAMEN-PELLET-KOMPAKT":
-                    return KKPELLET1;  
-                    case "KAMEN-DRX":
-                    return KDLX1;
-        default:
-            return null; // lub jakiś domyślny obraz, jeśli potrzebujesz
+
+    var selectedPower = document.getElementById('powerOptions').value;
+
+    if (pdfType === "ATLANTIC-HYDROBOX") {
+        if (selectedPower === '6 kW' || selectedPower === '8 kW' || selectedPower === '10 kW') {
+            return ATLHBL1; // Zmienna dla mocy 6-10 kW
+        } else if (selectedPower === '14 kW' || selectedPower === '15 kW' || selectedPower === '17 kW') {
+            return ATLHB1; // Zmienna dla mocy 14-17 kW
+        } else {
+            return ATLHB1; // Domyślny obraz dla ATLANTIC-HYDROBOX, jeśli power nie jest określone
+        }
+    } else if (pdfType === "Mitsubishi-cylinder") {
+        return imageBaseMitsubishiCylinder;
+    } else if (pdfType === "Mitsubishi-ecoinverter") {
+        return imageBaseMitsubishiCylinder;
+    } else if (pdfType === "Mitsubishi-hydrobox") {
+        return imageBase64;
+    } else if (pdfType === "Mitsubishi-hp") {
+        return imageBase64;
+    } else if (pdfType === "Toshiba 3F") {
+        return imageBase57;
+    } else if (pdfType === "Toshiba 1F") {
+        return imageBase57;
+    } else if (pdfType === "ATLANTIC") {
+        return imageBaseForAtlantic;
+    } else if (pdfType === "GALMET-PRIMA") {
+        return imageBaseGalmetWEW;
+    } else if (pdfType === "HEIZTECHNIK") {
+        return imageBaseHeizWEW;
+    } else if (pdfType === "VIESSMANN") {
+        return imageBaseViessmanWEW;
+    } else if (pdfType === "MITSUBISHI AP") {
+        return MitsubishiAP;
+    } else if (pdfType === "MITSUBISHI HR") {
+        return MitsubishiHR;
+    } else if (pdfType === "LAZAR") {
+        return Lazar1;
+    } else if (pdfType === "ROTENSO") {
+        return R2;
+    } else if (pdfType === "KIPI") {
+        return KIPI1;
+    } else if (pdfType === "KAMEN-KOMPAKT-LUX") {
+        return KKLUX1;
+    } else if (pdfType === "KAMEN-PELLET-KOMPAKT") {
+        return KKPELLET1;
+    } else if (pdfType === "KAMEN-DRX") {
+        return KDLX1;
+    } else {
+        return null; // lub jakiś domyślny obraz, jeśli potrzebujesz
     }
 }
+
+
 
 function generatePDF() {
     const tankCapacity = document.getElementById('tankCapacity').value;
@@ -393,6 +447,20 @@ function generatePDF() {
     
     const KKPELLET = `<div id="page" style="background-image: url('${KKPELLETDS}');"></div>`;
     const KKDRX = `<div id="page" style="background-image: url('${KDLXDS}');"></div>`;
+
+    const HPDS1 = `<div id="page" style="background-image: url('${MHPDS1}');"></div>`;
+    const HPDS2 = `<div id="page" style="background-image: url('${MHPDS2}');"></div>`;
+
+    const ATHB1 = `<div id="page" style="background-image: url('${ATLHB2DS1}');"></div>`;
+    const ATHB2 = `<div id="page" style="background-image: url('${ATLHB2DS2}');"></div>`;
+
+    const ATLANTICHYDDS1 = `<div id="page" style="background-image: url('${ATLANTICDS1}');"></div>`;
+    const ATLANTICHYDDS2 = `<div id="page" style="background-image: url('${ATLANTICDS2}');"></div>`;
+
+    
+
+
+
 
 
 
@@ -552,6 +620,18 @@ else if (pdfType === 'ATLANTIC') {
     // Dodaj więcej warunków dla innych mocy
     // ...
   }
+
+    
+ else if (pdfType === 'ATLANTIC-HYDROBOX') {
+    var selectedPower = document.getElementById('powerOptions').value;
+    
+    if (selectedPower === '14 kW' || selectedPower === '15 kW' || selectedPower === '17 kW') {
+        content = firstPageContent + secondPageContent + thirdPageContent + MeetUsContent + ATHB1 + ATHB2 + FourthPageContent;
+    } else if (selectedPower === '10 kW' || selectedPower === '8 kW' || selectedPower === '6 kW') {
+        content = firstPageContent + secondPageContent + thirdPageContent + MeetUsContent + ATLANTICHYDDS1 + ATLANTICHYDDS2 + FourthPageContent;
+    }
+}
+
   else if (pdfType === 'ROTENSO') {
     var selectedPower = document.getElementById('powerOptions').value;
     
@@ -572,7 +652,7 @@ else if (pdfType === 'ATLANTIC') {
     
     if (selectedPower === '12 kW') {
       content = firstPageContent + secondPageContent + thirdPageContent + MeetUsContent+ GLF4+ GLF3+ GLF2+ GLF1+ FourthPageContent;
-    } else if (selectedPower === '10 kW' || selectedPower === '8 kW') {
+    } else if (selectedPower === '10 kW' || selectedPower === '8 kW' || selectedPower === '6 kW') {
       content = firstPageContent + secondPageContent + thirdPageContent + MeetUsContent+GLS1+ GLS2+GLS3+GLS4+FourthPageContent;
     } 
     // Dodaj więcej warunków dla innych mocy
@@ -623,6 +703,12 @@ else if (pdfType === 'Mitsubishi-ecoinverter')
     // Dodaj standardowe strony
     content = firstPageContent + secondPageContent + thirdPageContent + MeetUsContent+MitsEcoDS1+MitsEcoDS2+MitsZubDS1+MitsZubDS2+MitsZubDS3+FourthPageContent;
 }
+else if (pdfType === 'Mitsubishi-hp') 
+    {
+        // Dodaj standardowe strony
+        content = firstPageContent + secondPageContent + thirdPageContent + MeetUsContent+HPDS1+HPDS2+FourthPageContent;
+    }
+    
 
 else {
     // Dodaj standardowe strony
@@ -653,7 +739,7 @@ function getTableContentByType(pdfType, power, bufferCapacity, tankCapacity) {
             <td>szt.</td>
             <td>0</td>
         `;
-    }else{
+    } else{
         bufferRow = `
             <td>Bufor (sprzęgło hydrauliczne) ${bufferCapacity}l + osprzęt</td>
             <td>szt.</td>
@@ -762,6 +848,18 @@ function getTableContentByType(pdfType, power, bufferCapacity, tankCapacity) {
   </table>
   `;
   break;
+
+
+
+
+  
+
+
+
+
+
+
+
         }
         else if (power === '6 kW') {
           tableContent = `
@@ -846,6 +944,93 @@ function getTableContentByType(pdfType, power, bufferCapacity, tankCapacity) {
   `};
   break;
 
+
+  case "Mitsubishi-hp":
+    if (power === '6 kW') {
+      tableContent = `
+  <table id="customTable" border="1">
+  <tbody>
+  <tr>
+  <th>Numer</th>
+  <th>Nazwa towaru</th>
+  <th>Miara</th>
+  <th>Ilość</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td>JEDNOSTKA WEWNĘTRZNA MITSUBISHI SUZ HYPER HEATING 6 kW</td>
+  <td>szt.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>JEDNOSTKA ZEWWEWNĘTRZNA MITSUBISHI SUZ HYPER HEATING 6 kW</td>
+  <td>szt.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>3</td>
+  ${tankRow}
+</tr>
+<tr>
+    <td>4</td>
+    ${bufferRow}
+</tr>;
+<tr>
+  <td>5</td>
+  <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+  <td>kpl.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>Grupa bezpieczeństwa CWU (6bar)</td>
+  <td>szt.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>Grupa bezpieczeństwa C.0 (2.5 bar)</td>
+  <td>szt.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>Pompa obiegowa do instalacji grzewczej LFP ( z osprzętem )</td>
+  <td>szt.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>MIEDŹ CHŁODNICZA</td>
+  <td>kpl.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>REGULATOR BEZPRZEWODOWY MITSUBISHI PAR-WT</td>
+  <td>szt.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+  <td>szt.</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+  <td>kpl.</td>
+  <td>1</td>
+</tr>
+  </tbody>
+</table>
+`;
+break;
+
+
+    }
 
   case "KAMEN-KOMPAKT-LUX":
 
@@ -4006,37 +4191,37 @@ break;
                                 ${bufferRow}
                             </tr>
                             <tr>
-                                <td>5</td>
+                                <td>4</td>
                                 <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
                                 <td>kpl.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>6</td>
+                                <td>5</td>
                                 <td>Grupa bezpieczeństwa CWU (6bar)</td>
                                 <td>szt.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>7</td>
+                                <td>6</td>
                                 <td>MIEDŹ CHŁODNICZA</td>
                                 <td>kpl.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>8</td>
+                                <td>7</td>
                                 <td>REGULATOR BEZPRZEWODOWY MITSUBISHI PAR-WT</td>
                                 <td>szt.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>9</td>
+                                <td>8</td>
                                 <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
                                 <td>szt.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>10</td>
+                                <td>9</td>
                                 <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
                                 <td>kpl.</td>
                                 <td>1</td>
@@ -4081,36 +4266,30 @@ break;
                             </tr>
                             <tr>
                                 <td>5</td>
-                                <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
-                                <td>kpl.</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
                                 <td>Grupa bezpieczeństwa CWU (6bar)</td>
                                 <td>szt.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>7</td>
+                                <td>6</td>
                                 <td>MIEDŹ CHŁODNICZA</td>
                                 <td>kpl.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>8</td>
+                                <td>7</td>
                                 <td>REGULATOR BEZPRZEWODOWY MITSUBISHI PAR-WT</td>
                                 <td>szt.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>9</td>
+                                <td>8</td>
                                 <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
                                 <td>szt.</td>
                                 <td>1</td>
                             </tr>
                             <tr>
-                                <td>10</td>
+                                <td>9</td>
                                 <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
                                 <td>kpl.</td>
                                 <td>1</td>
@@ -4933,6 +5112,612 @@ else if (power === '14 kW') {
 `};
 
 
+
+case "ATLANTIC-HYDROBOX":
+    if (power === '15 kW') {
+        tableContent = `
+    <table id="customTable" border="1">
+    <tbody>
+    <tr>
+        <th>Numer</th>
+        <th>Nazwa towaru</th>
+        <th>Miara</th>
+        <th>Ilość</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>ATLANTIC EXTENSA AI DUO 15 KW 3F HYDROBOX</td>
+        <td>szt.</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        ${bufferRow}
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+        <td>kpl.</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Grupa bezpieczeństwa CWU (6bar)</td>
+        <td>szt.</td>
+        <td>1</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>Grupa bezpieczeńśtwa C.O (2.5 bar)</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+        <td>6</td>
+        <td>KABEL GRZEWCZY</td>
+        <td>kpl.</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>MIEDŹ CHŁODNICZA</td>
+        <td>kpl.</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>SONDA POGODOWA</td>
+        <td>szt.</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+        <td>szt.</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+        <td>kpl.</td>
+        <td>1</td>
+    </tr>
+</tbody>
+</table>
+`;
+
+
+    } else if (power === '10 kW') {
+    tableContent = `
+<table id="customTable" border="1">
+<tbody>
+<tr>
+    <th>Numer</th>
+    <th>Nazwa towaru</th>
+    <th>Miara</th>
+    <th>Ilość</th>
+</tr>
+<tr>
+    <td>1</td>
+    <td>ATLANTIC EXTENSA AI DUO 10 KW 1F HYDROBOX</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+    <td>2</td>
+    ${bufferRow}
+</tr>
+<tr>
+    <td>3</td>
+    <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Grupa bezpieczeństwa CWU (6bar)</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Grupa bezpieczeńśtwa C.O (2.5 bar)</td>
+<td>szt.</td>
+<td>1</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>KABEL GRZEWCZY</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>MIEDŹ CHŁODNICZA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>8</td>
+    <td>SONDA POGODOWA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>9</td>
+    <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>10</td>
+    <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+</tbody>
+</table>
+`;
+
+    break;
+} 
+
+ else if (power === '10 kW') {
+    tableContent = `
+<table id="customTable" border="1">
+<tbody>
+<tr>
+    <th>Numer</th>
+    <th>Nazwa towaru</th>
+    <th>Miara</th>
+    <th>Ilość</th>
+</tr>
+<tr>
+    <td>1</td>
+    <td>ATLANTIC EXTENSA AI DUO 10 KW 1F HYDROBOX</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+    <td>2</td>
+    ${bufferRow}
+</tr>
+<tr>
+    <td>3</td>
+    <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Grupa bezpieczeństwa CWU (6bar)</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Grupa bezpieczeńśtwa C.O (2.5 bar)</td>
+<td>szt.</td>
+<td>1</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>KABEL GRZEWCZY</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>MIEDŹ CHŁODNICZA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>8</td>
+    <td>SONDA POGODOWA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>9</td>
+    <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>10</td>
+    <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+</tbody>
+</table>
+`;
+
+    break;
+} 
+
+
+else if (power === '8 kW') {
+    tableContent = `
+<table id="customTable" border="1">
+<tbody>
+<tr>
+    <th>Numer</th>
+    <th>Nazwa towaru</th>
+    <th>Miara</th>
+    <th>Ilość</th>
+</tr>
+<tr>
+    <td>1</td>
+    <td>ATLANTIC EXTENSA AI DUO 8 KW 1F HYDROBOX</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+    <td>2</td>
+    ${bufferRow}
+</tr>
+<tr>
+    <td>3</td>
+    <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Grupa bezpieczeństwa CWU (6bar)</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Grupa bezpieczeńśtwa C.O (2.5 bar)</td>
+<td>szt.</td>
+<td>1</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>KABEL GRZEWCZY</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>MIEDŹ CHŁODNICZA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>8</td>
+    <td>SONDA POGODOWA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>9</td>
+    <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>10</td>
+    <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+</tbody>
+</table>
+`;
+
+    break;
+} 
+
+
+else if (power === '14 kW') {
+    tableContent = `
+<table id="customTable" border="1">
+<tbody>
+<tr>
+    <th>Numer</th>
+    <th>Nazwa towaru</th>
+    <th>Miara</th>
+    <th>Ilość</th>
+</tr>
+<tr>
+    <td>1</td>
+    <td>ATLANTIC EXTENSA AI DUO 14 KW 3F HYDROBOX</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+    <td>2</td>
+    ${bufferRow}
+</tr>
+<tr>
+    <td>3</td>
+    <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Grupa bezpieczeństwa CWU (6bar)</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Grupa bezpieczeńśtwa C.O (2.5 bar)</td>
+<td>szt.</td>
+<td>1</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>KABEL GRZEWCZY</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>MIEDŹ CHŁODNICZA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>8</td>
+    <td>SONDA POGODOWA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>9</td>
+    <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>10</td>
+    <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+</tbody>
+</table>
+`;
+
+    break;
+} 
+else if (power === '8 kW') {
+    tableContent = `
+<table id="customTable" border="1">
+<tbody>
+<tr>
+    <th>Numer</th>
+    <th>Nazwa towaru</th>
+    <th>Miara</th>
+    <th>Ilość</th>
+</tr>
+<tr>
+    <td>1</td>
+    <td>ATLANTIC EXTENSA AI DUO 8 KW 1F HYDROBOX</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+    <td>2</td>
+    ${bufferRow}
+</tr>
+<tr>
+    <td>3</td>
+    <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Grupa bezpieczeństwa CWU (6bar)</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Grupa bezpieczeńśtwa C.O (2.5 bar)</td>
+<td>szt.</td>
+<td>1</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>KABEL GRZEWCZY</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>MIEDŹ CHŁODNICZA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>8</td>
+    <td>SONDA POGODOWA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>9</td>
+    <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>10</td>
+    <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+</tbody>
+</table>
+`;
+
+    break;
+}
+
+else if (power === '17 kW') {
+    tableContent = `
+<table id="customTable" border="1">
+<tbody>
+<tr>
+    <th>Numer</th>
+    <th>Nazwa towaru</th>
+    <th>Miara</th>
+    <th>Ilość</th>
+</tr>
+<tr>
+    <td>1</td>
+    <td>ATLANTIC EXTENSA AI DUO 17 KW 3F HYDROBOX</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+    <td>2</td>
+    ${bufferRow}
+</tr>
+<tr>
+    <td>3</td>
+    <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Grupa bezpieczeństwa CWU (6bar)</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Grupa bezpieczeńśtwa C.O (2.5 bar)</td>
+<td>szt.</td>
+<td>1</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>KABEL GRZEWCZY</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>MIEDŹ CHŁODNICZA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>8</td>
+    <td>SONDA POGODOWA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>9</td>
+    <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+    <td>szt.</td>
+    <td>1</td>
+</tr>
+<tr>
+    <td>10</td>
+    <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+    <td>kpl.</td>
+    <td>1</td>
+</tr>
+</tbody>
+</table>
+`;
+
+    break;
+}
+
+
+
+else if (power === '6 kW') {
+    tableContent = `
+<table id="customTable" border="1">
+<tbody>
+                    <tr>
+                        <th>Numer</th>
+                        <th>Nazwa towaru</th>
+                        <th>Miara</th>
+                        <th>Ilość</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>ATLANTIC EXTENSA AI DUO 6 KW 1F HYDROBOX</td>
+                        <td>szt.</td>
+                        <td>1</td>
+                    </tr>
+                        <td>2</td>
+                        ${bufferRow}
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+                        <td>kpl.</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Grupa bezpieczeństwa CWU (6bar)</td>
+                        <td>szt.</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                    <td>5</td>
+                    <td>Grupa bezpieczeńśtwa C.O (2.5 bar)</td>
+                    <td>szt.</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                        <td>6</td>
+                        <td>KABEL GRZEWCZY</td>
+                        <td>kpl.</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>MIEDŹ CHŁODNICZA</td>
+                        <td>kpl.</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>SONDA POGODOWA</td>
+                        <td>szt.</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+                        <td>szt.</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+                        <td>kpl.</td>
+                        <td>1</td>
+                    </tr>
+                </tbody>
+</table>
+`};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 case "VIESSMANN":
         if (power === '13 kW') {
             tableContent = `
@@ -5223,7 +6008,11 @@ case "VIESSMANN":
 `;
 
         break;
-    } else if (power === '8 kW') {
+    } 
+    
+    
+    
+    else if (power === '8 kW') {
         tableContent = `
     <table id="customTable" border="1">
     <tbody>
@@ -5285,9 +6074,78 @@ case "VIESSMANN":
                         </tr>
                     </tbody>
 </table>
-`};
+`;
 
         break;
+
+    }
+
+        else if (power === '6 kW') {
+            tableContent = `
+        <table id="customTable" border="1">
+        <tbody>
+                            <tr>
+                                <th>Numer</th>
+                                <th>Nazwa towaru</th>
+                                <th>Miara</th>
+                                <th>Ilość</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>GALMET PRIMA 6 KW JEDNOSTKA ZEWNĘTRZNA ORAZ JEDNOSTKA WEWNĘTRZNA ( HYDROBOX )</td>
+                                <td>szt.</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                            <td>2</td>
+                            ${tankRow}
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>ELEMENTY HYDRAULICZNE I ELEKTRYCZNE DO POMPY CIEPŁA</td>
+                                <td>szt.</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                ${bufferRow}
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>GRUPA BEZPIECZEŃŚTWA C.O (3 BAR )</td>
+                                <td>kpl.</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Grupa bezpieczeństwa CWU (6bar)</td>
+                                <td>szt.</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>MIEDŹ CHŁODNICZA</td>
+                                <td>kpl.</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>STOJAK LUB WIESZAK POD POMPĘ CIEPŁA</td>
+                                <td>szt.</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>MONTAŻ , DOJAZD , URUCHOMIENIE ORAZ SZKOLENIE UŻYTKOWNIKA</td>
+                                <td>kpl.</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+    </table>
+    `};
+    
+            break;
+
         case "HEIZTECHNIK":
         if (power === '14 kW') {
             tableContent = `
@@ -5777,6 +6635,115 @@ case "VIESSMANN":
     </tr>
                 </table>`;
             break;
+
+
+            case "ATLANTIC-HYDROBOX":
+                tableHtml = `
+                    <table border='1' id="kamanTable">
+                    <tr>
+            <th>Lp.</th>
+            <th>Nazwa</th>
+            <th>Miara</th>
+            <th>Cena</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Pompa do cyrkulacji z osprzętem i regulatorem czasowym</td>
+            <td>szt.</td>
+            <td>660zł</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Separator zanieczyszczeń magnetyczny (odmulnik)</td>
+            <td>szt.</td>
+            <td>580zł</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Pompa obiegowa do instalacji C.0 (LFP/WILO) z osprzętem</td>
+            <td>szt.</td>
+            <td>650zł</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td> Zbiornik z stali nierdzewnej</td>
+            <td>szt.</td>
+            <td>1250zł</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Dodatkowy sterownik do zarządznia do drugą strefą</td>
+            <td>szt.</td>
+            <td>450zł</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Licznik energii elektrycznej 3f</td>
+            <td>szt.</td>
+            <td>540zł</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Kabel grzewczy z termostatem ( istnieje możliwość podpięcia do kanalizacji lub drenażu po wcześniejszych oględzinach i potwierdzeniu przez montera ) </td>
+            <td>kpl.</td>
+            <td>500zł</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Wykonanie podbudowy ( fundamentu ) pod pompę ciepła: krawężniki przemysłowe ułożone na podsypce betonowej minimum B20 na głębokość 30-40 cm ( górna krawedź ułożona na równo z gruntem chłonnym)</td>
+            <td>kpl.</td>
+            <td>300zł</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Doprowadzenie kabla siłowego do pompy ciepła ( liczone gdy odległość kabla zasilającego o odpowiednim przekroju jest większa niż 10 mb )</td>
+            <td>mb.</td>
+            <td>55zł</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Demontaż starego źródła ciepła - polega na odłączeniu kotła od instalacji C.O i odsunięciu go tak aby nie przeszkadzał przy montażu pompy ciepła ( w tym samym pomieszczeniu ). Istnieje możliwość wywiezienia go poza pomieszczenie w którym był zamontowany jeżeli będzie to możliwe za pomocą wózka paletowego ( tzn. powierzchnia musi być równa bez progów i odpowiedniej szerokośći )</td>
+            <td>kpl.</td>
+            <td>500zł</td>
+        </tr>
+    
+     <tr>
+            <td>11</td>
+            <td>BUFOR (SPRZĘGŁO HYDRAULICZNE) 40-140L + OSPRZĘT</td>
+            <td>Kpl</td>
+            <td>1400-1950 zł</td>
+        </tr>
+    <tr>
+            <td>12</td>
+            <td>ZESTAW PODŁĄCZENIA ZASOBNIKA C.W.U. - umożliwia współpracę z dowolnym wewnęrznym zasobnikiem C.W.U</td>
+            <td>Kpl</td>
+            <td>1400-1950 zł</td>
+        </tr>
+            <td>13</td>
+            <td>TACA OCIEKOWA - umożliwia odbiór kondensatu</td>
+            <td>Kpl</td>
+            <td>550 zł</td>
+        </tr>
+    <tr>
+            <td>14</td>
+            <td>CENTRALKA COZYTOUCH 2 - Umożliwia zdalne sterowanie urządzeniem oraz jego funkcjami za pomocą aplikacji mobilnej </td>
+            <td>Kpl</td>
+            <td>560 zł</td>
+        </tr>
+    <tr>
+            <td>15</td>
+            <td>PROGRAMATOR A59 NB - Podstawowy programator z funkcją zmiany trybów pracy ( KOMFORT, ECO ) </td>
+            <td>Kpl</td>
+            <td>560 zł</td>
+        </tr>
+    <tr>
+            <td>16</td>
+            <td> ZESTAW HYDRAULICZNY 2 OBIEGI GRZWEWCZE  - umożliwia podłączenia drugiego obiegu grzewczego </td>
+            <td>Kpl</td>
+            <td>1900 zł</td>
+        </tr>
+                    </table>`;
+                break;
             case "GALMET-PRIMA":
                 tableHtml = `
                     <table border='1' id="kamanTable">
@@ -6087,7 +7054,83 @@ case "VIESSMANN":
                                 </table>`;
                             break;
 
-
+                            case "Mitsubishi-hp":
+                                tableHtml = `
+                                    <table border='1' id="kamanTable">
+                                    <tr>
+                                    <th>Lp.</th>
+                                    <th>Nazwa</th>
+                                    <th>Miara</th>
+                                    <th>Cena</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Pompa do cyrkulacji z osprzętem i regulatorem czasowym</td>
+                                    <td>szt.</td>
+                                    <td>660zł</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Separator zanieczyszczeń magnetyczny (odmulnik)</td>
+                                    <td>szt.</td>
+                                    <td>580zł</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Pompa obiegowa do instalacji C.0 (LFP/WILO) z osprzętem</td>
+                                    <td>szt.</td>
+                                    <td>650zł</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td> Zbiornik z stali nierdzewnej</td>
+                                    <td>szt.</td>
+                                    <td>1250zł</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Dodatkowy sterownik do zarządznia do drugą strefą</td>
+                                    <td>szt.</td>
+                                    <td>450zł</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Licznik energii elektrycznej 3f</td>
+                                    <td>szt.</td>
+                                    <td>540zł</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Kabel grzewczy z termostatem ( istnieje możliwość podpięcia do kanalizacji lub drenażu po wcześniejszych oględzinach i potwierdzeniu przez montera ) </td>
+                                    <td>kpl.</td>
+                                    <td>500zł</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Wykonanie podbudowy ( fundamentu ) pod pompę ciepła: krawężniki przemysłowe ułożone na podsypce betonowej minimum B20 na głębokość 30-40 cm ( górna krawedź ułożona na równo z gruntem chłonnym)</td>
+                                    <td>kpl.</td>
+                                    <td>300zł</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Doprowadzenie kabla siłowego do pompy ciepła ( liczone gdy odległość kabla zasilającego o odpowiednim przekroju jest większa niż 10 mb )</td>
+                                    <td>mb.</td>
+                                    <td>55zł</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Demontaż starego źródła ciepła - polega na odłączeniu kotła od instalacji C.O i odsunięciu go tak aby nie przeszkadzał przy montażu pompy ciepła ( w tym samym pomieszczeniu ). Istnieje możliwość wywiezienia go poza pomieszczenie w którym był zamontowany jeżeli będzie to możliwe za pomocą wózka paletowego ( tzn. powierzchnia musi być równa bez progów i odpowiedniej szerokośći )</td>
+                                    <td>kpl.</td>
+                                    <td>500zł</td>
+                                </tr>
+                             <tr>
+                                    <td>11</td>
+                                    <td>BUFOR (SPRZĘGŁO HYDRAULICZNE) 40-140L + OSPRZĘT</td>
+                                    <td>Kpl</td>
+                                    <td>1400-1950 zł</td>
+                                </tr>
+                                    </table>`;
+                                break;
 
                             case "KIPI":
                                 tableHtml = `
